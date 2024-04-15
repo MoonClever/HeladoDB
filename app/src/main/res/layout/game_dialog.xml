@@ -8,11 +8,11 @@
     <ImageView
         android:id="@+id/ivHeader"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="Header"
+        android:layout_height="100dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/header_string"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/header" />
+        app:srcCompat="@drawable/la_michoacana" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTitle"
@@ -23,7 +23,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:hint="Título"
+        android:hint="@string/sabor_string"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -31,15 +31,17 @@
         app:boxCornerRadiusTopStart="16dp"
         app:startIconDrawable="@drawable/ic_title">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietTitle"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spSabor"
+            app:layout_constraintTop_toBottomOf="@id/tvSabor"
+            app:layout_constraintStart_toStartOf="@+id/glStart"
+            app:layout_constraintEnd_toEndOf="@+id/glEnd"
+            android:entries="@array/spinnerItems"
+            android:textColor="@color/black"
+            android:theme="@style/mySpinnerItemStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:maxLines="1">
-
-        </com.google.android.material.textfield.TextInputEditText>
+            android:popupBackground="@color/background_white"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +54,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:hint="Género"
+        android:hint="@string/marca_string"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -61,7 +63,7 @@
         app:startIconDrawable="@drawable/ic_genre">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietGenre"
+            android:id="@+id/tietMarca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
@@ -81,7 +83,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:hint="Desarrollador"
+        android:hint="@string/tamano_string"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -90,7 +92,7 @@
         app:startIconDrawable="@drawable/ic_developer">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietDeveloper"
+            android:id="@+id/tietTamano"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"

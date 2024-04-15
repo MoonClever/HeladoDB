@@ -4,28 +4,28 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.jordicuevas.videogamesdb.data.db.model.GameEntity
+import com.jordicuevas.videogamesdb.data.db.model.HeladoEntity
 import com.jordicuevas.videogamesdb.util.Constants
 
 @Database(
-    entities = [GameEntity::class],
+    entities = [HeladoEntity::class],
     version = 1,
     exportSchema = true
 )
 
-abstract class GameDatabase: RoomDatabase() {
-    abstract fun gameDao(): GameDao
+abstract class HeladoDatabase: RoomDatabase() {
+    abstract fun heladoDao(): HeladoDao
 
     companion object {
 
         @Volatile
-        private var INSTANCE: GameDatabase? = null
+        private var INSTANCE: HeladoDatabase? = null
 
-        fun getDatabase(context: Context): GameDatabase {
+        fun getDatabase(context: Context): HeladoDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    GameDatabase::class.java,
+                    HeladoDatabase::class.java,
                     Constants.DATABASE_NAME
                 )
                     .fallbackToDestructiveMigration()

@@ -5,7 +5,7 @@
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEEEEE"
+    android:background="@color/background_white"
     android:fitsSystemWindows="true"
     tools:context=".ui.MainActivity">
 
@@ -24,19 +24,5 @@
         android:textSize="25sp"
         android:visibility="invisible" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#F83232"
-        android:clickable="true"
-        android:contentDescription="@string/agregrar_elemento"
-        android:focusable="true"
-        android:onClick="click"
-        app:srcCompat="@drawable/ic_add"
-        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

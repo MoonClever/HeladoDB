@@ -3,28 +3,25 @@ package com.jordicuevas.videogamesdb.ui
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.jordicuevas.videogamesdb.R
-import com.jordicuevas.videogamesdb.application.VideoGamesDBApp
-import com.jordicuevas.videogamesdb.data.GameRepository
-import com.jordicuevas.videogamesdb.data.db.model.GameEntity
+import com.jordicuevas.videogamesdb.application.HeladoDBApp
+import com.jordicuevas.videogamesdb.data.HeladoRepository
+import com.jordicuevas.videogamesdb.data.db.model.HeladoEntity
 import com.jordicuevas.videogamesdb.databinding.ActivityMainBinding
-import com.jordicuevas.videogamesdb.util.Constants
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
 
-    private var games: List<GameEntity> = emptyList()
-    private lateinit var repository: GameRepository
+    private var helados: List<HeladoEntity> = emptyList()
+    private lateinit var repository: HeladoRepository
 
-    private lateinit var gameAdapter: GameAdapter
+    private lateinit var heladoAdapter: HeladoAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +30,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        repository = (application as VideoGamesDBApp).repository
+        repository = (application as HeladoDBApp).repository
 
-        gameAdapter = GameAdapter(){ selectedGame ->
-            val dialog = GameDialog(
-                newGame = false,
-                game = selectedGame,
+        heladoAdapter = HeladoAdapter(){ selectedHelado ->
+            val dialog = HeladoDialog(
+                newHelado = false,
+                helado = selectedHelado,
                 updateUI = { updateUI()
                 },message = { action ->
                   message(action)
@@ -49,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvGames.apply{
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = gameAdapter
+            adapter = heladoAdapter
         }
 
         updateUI()
@@ -61,18 +58,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI(){
         lifecycleScope.launch() {
-            games = repository.getAllGames()
+            helados = repository.getAllGames()
 
             binding.tvSinRegistros.visibility =
-                if(games.isEmpty()) View.VISIBLE else View.INVISIBLE
+                if(helados.isEmpty()) View.VISIBLE else View.INVISIBLE
 
-            gameAdapter.updateList(games)
+            heladoAdapter.updateList(helados)
         }
     }
 
     fun click(view: View) {
         //Manejo de el click del FAB
-        val dialog = GameDialog(
+        val dialog = HeladoDialog(
             updateUI = {
                 updateUI()
             }, message = {action ->
@@ -81,11 +78,12 @@ class MainActivity : AppCompatActivity() {
         dialog.show(supportFragmentManager, "InsertDialog")
     }
 
-    private fun message(text: String){
+    private fun message(text: String) {
         //Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
         Snackbar.make(binding.cl, text, Snackbar.LENGTH_SHORT)
-            .setTextColor(getColor(R.color.white))
-            .setBackgroundTint(Color.parseColor("#9E1734"))
+            .setTextColor(resources.getColor(R.color.background_white, theme))
+            .setBackgroundTint(resources.getColor(R.color.pink, theme))
             .show()
+
     }
 }

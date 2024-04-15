@@ -5,30 +5,30 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.jordicuevas.videogamesdb.data.db.model.GameEntity
+import com.jordicuevas.videogamesdb.data.db.model.HeladoEntity
 import com.jordicuevas.videogamesdb.util.Constants
 
 @Dao
-interface GameDao {
+interface HeladoDao {
 
     //Create
     @Insert
-    suspend fun insertGame(game: GameEntity)
+    suspend fun insertHelado(helado: HeladoEntity)
 
     @Insert
-    suspend fun insertGame(games: List<GameEntity>)
+    suspend fun insertHelado(helado: List<HeladoEntity>)
 
     //Read
     @Query("SELECT * FROM ${Constants.DATABASE_GAME_TABLE}")
-    suspend fun getAllGames(): List<GameEntity>
+    suspend fun getAllHelados(): List<HeladoEntity>
 
     //Update
     @Update
-    suspend fun updateGame(game: GameEntity)
+    suspend fun updateHelado(helado: HeladoEntity)
 
     //Delete
     @Delete
-    suspend fun deleteGame(game: GameEntity)
+    suspend fun deleteHelado(game: HeladoEntity)
 
 
 }

@@ -1,6 +1,35 @@
 <resources>
-    <string name="app_name">VideogamesDB</string>
+    <string name="app_name">HeladoDB</string>
     <string name="no_hay_registros">¡No hay registros!</string>
     <string name="agregrar_elemento">Agregrar elemento</string>
     <string name="imagen">Imagen</string>
+    <string name="header_string">Logo de la michoacana</string>
+    <string name="sabor_string">Sabor de helado</string>
+    <string name="sabor_hint_string">Sabor de helado</string>
+    <string name="marca_string">Marca</string>
+    <string name="marca_hint_string">Marca de helado</string>
+    <string name="btn_agregar_string">Agregar helado</string>
+    <string name="btn_recyclerView_string">Ver Helados agregados</string>
+    <string name="tamano_string">Tamaño</string>
+    <string name="tamano_hint_string">Tamaño del helado</string>
+    <string name="guardar_string">Guardar</string>
+    <string name="cancelar_string">Cancelar</string>
+    <string name="exito_insert_string">Juego insertado exitosamente</string>
+    <string name="error_insert_string">Error al guardar juego</string>
+    <string name="actualizar_string">Actualizar</string>
+    <string name="borrar_string">Borrar</string>
+    <string name="exito_update_string">Juego actualizado exitosamente</string>
+    <string name="error_upload_string">Error al actualizar al juego</string>
+    <string name="confirmacion_string">Confirmación</string>
+    <string name="Alert_confirmation_string">¿Realmente deseas eliminar el juego %1$s?</string>
+    <string name="aceptar_string">Aceptar</string>
+    <string name="exito_delete_string">Juego borrado exitosamente</string>
+    <string name="error_delete_string">Error al borrar juego</string>
+    <string name="aviso_vacio_string">Por favor rellene los campos</string>
+    <string-array name="spinnerItems">
+        <item>Chocolate</item>
+        <item>Fresa</item>
+        <item>Vainilla</item>
+        <item>Napolitano</item>
+    </string-array>
 </resources>

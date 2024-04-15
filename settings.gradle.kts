@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "VideogamesDB"
+rootProject.name = "HeladoDB"
 include(":app")
  

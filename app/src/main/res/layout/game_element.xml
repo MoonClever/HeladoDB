@@ -23,7 +23,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/ivIcon"
+                android:id="@+id/ivHelado"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_margin="8dp"
@@ -31,30 +31,30 @@
                 android:outlineProvider="bounds"
                 android:padding="4dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/gamepad"
+                android:src="@drawable/ice_cream_silhouette"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvTitle"
+                android:id="@+id/tvNombre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="#FF0000"
+                android:textColor="@color/pink"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/ivIcon"
+                app:layout_constraintStart_toEndOf="@+id/ivHelado"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.16"
-                tools:text="Título del juego" />
+                tools:text="@string/sabor_hint_string" />
 
             <TextView
-                android:id="@+id/tvGenre"
+                android:id="@+id/tvMarca"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -63,13 +63,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/ivIcon"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintStart_toEndOf="@id/ivHelado"
+                app:layout_constraintTop_toBottomOf="@id/tvNombre"
                 app:layout_constraintVertical_bias="0.2"
-                tools:text="Género" />
+                tools:text="@string/marca_hint_string" />
 
             <TextView
-                android:id="@+id/tvDeveloper"
+                android:id="@+id/tvTamano"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -79,9 +79,9 @@
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivIcon"
-                app:layout_constraintTop_toBottomOf="@id/tvGenre"
-                tools:text="Developer" />
+                app:layout_constraintStart_toEndOf="@id/ivHelado"
+                app:layout_constraintTop_toBottomOf="@id/tvMarca"
+                tools:text="@string/tamano_hint_string" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

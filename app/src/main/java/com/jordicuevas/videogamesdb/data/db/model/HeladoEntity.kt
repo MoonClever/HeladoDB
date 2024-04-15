@@ -6,14 +6,14 @@ import androidx.room.PrimaryKey
 import com.jordicuevas.videogamesdb.util.Constants
 
 @Entity(tableName = Constants.DATABASE_GAME_TABLE)
-data class GameEntity(
+data class HeladoEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "game_id")
+    @ColumnInfo(name = "helado_id")
     val id: Long = 0,
-    @ColumnInfo(name = "game_genre")
-    var genre: String,
-    @ColumnInfo(name = "game_title")
-    var title: String,
+    @ColumnInfo(name = "helado_sabor")
+    var sabor: String,
+    @ColumnInfo(name = "helado_marca")
+    var marca: String,
     @ColumnInfo(name = "game_developer", defaultValue = "Desconocido")
-    var developer: String
+    var tamano: String
 )

@@ -2,27 +2,29 @@ package com.jordicuevas.videogamesdb.ui
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import com.jordicuevas.videogamesdb.application.VideoGamesDBApp
-import com.jordicuevas.videogamesdb.data.GameRepository
-import com.jordicuevas.videogamesdb.data.db.model.GameEntity
+import com.jordicuevas.videogamesdb.R
+import com.jordicuevas.videogamesdb.application.HeladoDBApp
+import com.jordicuevas.videogamesdb.data.HeladoRepository
+import com.jordicuevas.videogamesdb.data.db.model.HeladoEntity
 import com.jordicuevas.videogamesdb.databinding.GameDialogBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 
-class GameDialog(
-    private val newGame: Boolean = true,
-    private var game: GameEntity = GameEntity(
-        title = "",
-        genre = "",
-        developer = ""
+class HeladoDialog(
+    private val newHelado: Boolean = true,
+    private var helado: HeladoEntity = HeladoEntity(
+        marca = "",
+        sabor = "",
+        tamano = ""
     ),
     private val updateUI: () -> Unit,
     private val message: (String) -> Unit
@@ -36,7 +38,7 @@ class GameDialog(
 
     private var saveButton: Button? = null
 
-    private lateinit var repository: GameRepository
+    private lateinit var repository: HeladoRepository
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -44,79 +46,91 @@ class GameDialog(
 
         builder = AlertDialog.Builder(requireContext())
 
-        repository = (requireContext().applicationContext as VideoGamesDBApp).repository
+        repository = (requireContext().applicationContext as HeladoDBApp).repository
 
         binding.apply{
-            binding.tietTitle.setText(game.title)
-            binding.tietGenre.setText(game.genre)
-            binding.tietDeveloper.setText(game.developer)
+            binding.spSabor.setSelection(setIDSpinner(helado.sabor))
+            binding.tietMarca.setText(helado.marca)
+            binding.tietTamano.setText(helado.tamano)
         }
 
-        dialog = if(newGame)
-            buildDialog("Guardar", "Cancelar", {
+        dialog = if(newHelado)
+            buildDialog(getString(R.string.guardar_string), getString(R.string.cancelar_string), {
                   //Accion guardar
-                game.apply{
-                    title = binding.tietTitle.text.toString()
-                    genre = binding.tietGenre.text.toString()
-                    developer = binding.tietDeveloper.text.toString()
+                helado.apply{
+                    marca = binding.spSabor.selectedItem.toString()
+                    sabor = binding.tietMarca.text.toString()
+                    tamano = binding.tietTamano.text.toString()
                 }
 
                 try {
                     lifecycleScope.launch {
-                        repository.insertGame(game)
+                        repository.insertHelado(helado)
                     }
-                    message("Juego insertado exitosamente")
+                    message(getString(R.string.exito_insert_string))
                     updateUI()
 
                 }catch(e: IOException){
                     e.printStackTrace()
-                    message("Error al guardar juego")
+                    message(getString(R.string.error_insert_string))
                     updateUI()
                 }
             }, {
                 //Accion cancelar
             })
         else
-            buildDialog("Actualizar", "Borrar", {
+            buildDialog(getString(R.string.actualizar_string), getString(R.string.borrar_string), {
                   //Accion actualizar
-                game.apply{
-                    title = binding.tietTitle.text.toString()
-                    genre = binding.tietGenre.text.toString()
-                    developer = binding.tietDeveloper.text.toString()
+                helado.apply{
+                    marca = binding.spSabor.selectedItem.toString()
+                    sabor = binding.tietMarca.text.toString()
+                    tamano = binding.tietTamano.text.toString()
                 }
 
                 try {
                     lifecycleScope.launch {
-                        repository.updateGame(game)
+                        repository.updateHelado(helado)
                     }
-                    message("Juego actualizado exitosamente")
+                    message(getString(R.string.exito_update_string))
                     updateUI()
 
                 }catch(e: IOException){
                     e.printStackTrace()
-                    message("Error al actualizar al juego")
+                    message(getString(R.string.error_upload_string))
                     updateUI()
                 }
             }, {
                  //Accion borrar
-
+                val context = requireContext()
                 AlertDialog.Builder(requireContext())
-                    .setTitle("Confirmación")
-                    .setMessage("¿Realmente deseas eliminar el juego ${game.title}?")
-                    .setPositiveButton("Aceptar"){ _, _ ->
+                    .setTitle(getString(R.string.confirmacion_string))
+                    .setMessage(getString(R.string.Alert_confirmation_string, helado.marca))
+                    .setPositiveButton(getString(R.string.aceptar_string)){ _, _ ->
                         try {
                             lifecycleScope.launch {
-                                repository.deleteGame(game)
+                                val result = async {
+                                    repository.deleteHelado(helado)
+                                }
+
+                                result.await()
+
+                                withContext(Dispatchers.Main){
+                                    message(context.getString(R.string.exito_delete_string))
+                                    updateUI()
+                                }
+
+
                             }
 
-                            message("Juego borrado exitosamente")
-                            updateUI()
+
+
+
                         }catch(e: IOException) {
                             e.printStackTrace()
-                            message("Error al borrar juego")
+                            message(getString(R.string.error_delete_string))
                         }
                     }
-                    .setNegativeButton("Cancelar"){ dialog, _ ->
+                    .setNegativeButton(getString(R.string.cancelar_string)){ dialog, _ ->
                         dialog.dismiss()
                     }
                     .create()
@@ -149,7 +163,8 @@ class GameDialog(
 //            }
 //        }
 
-        binding.tietTitle.addTextChangedListener(object: TextWatcher {
+
+        binding.tietMarca.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -164,22 +179,7 @@ class GameDialog(
 
         })
 
-        binding.tietGenre.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                saveButton?.isEnabled = validateFields()
-            }
-
-        })
-
-        binding.tietDeveloper.addTextChangedListener(object: TextWatcher {
+        binding.tietTamano.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -198,9 +198,8 @@ class GameDialog(
 
 
     private fun validateFields(): Boolean =
-        (binding.tietTitle.text.toString().isNotEmpty() &&
-                binding.tietGenre.text.toString().isNotEmpty() &&
-                binding.tietDeveloper.text.toString().isNotEmpty())
+        (       binding.tietMarca.text.toString().isNotEmpty() &&
+                binding.tietMarca.text.toString().isNotEmpty())
 
 
     private fun buildDialog(
@@ -210,7 +209,7 @@ class GameDialog(
         negativeButton: () -> Unit
     ): Dialog =
         builder.setView(binding.root)
-            .setTitle("Juego")
+            .setTitle(getString(R.string.app_name))
             .setPositiveButton(btn1Text){ _, _ ->
                 ///Accion para el boton positivo
                 positiveButton()
@@ -220,5 +219,16 @@ class GameDialog(
                 negativeButton()
             }
             .create()
+
+    private fun setIDSpinner(selection: String): Int {
+        var id = 0
+        when(selection){
+            "Chocolate" -> id = 0
+            "Fresa" -> id = 1
+            "Vainilla" -> id =  2
+            "Napolitano" -> id =  3
+        }
+        return id
+    }
 
 }

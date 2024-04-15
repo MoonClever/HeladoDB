@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/registro"
+    android:background="@color/background_pink"
+    tools:context=".ui.RegistroHelado">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTopMargin"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glBottomMargin"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.097323604" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glEnd"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvHelado"
+        android:text="@string/app_name"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/glTopMargin"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/ivHeader"
+        app:layout_constraintTop_toBottomOf="@id/tvHelado"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/la_michoacana"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/header_string" />
+
+    <TextView
+        android:id="@+id/tvSabor"
+        android:text="@string/sabor_string"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/ivHeader"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/spSabor"
+        app:layout_constraintTop_toBottomOf="@id/tvSabor"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:entries="@array/spinnerItems"
+        android:textColor="@color/black"
+        android:theme="@style/mySpinnerItemStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:popupBackground="@color/background_white"/>
+
+    <TextView
+        android:id="@+id/tvMarca"
+        android:text="@string/marca_string"
+        app:layout_constraintTop_toBottomOf="@id/spSabor"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etMarca"
+        android:hint="@string/marca_hint_string"
+        app:layout_constraintTop_toBottomOf="@id/tvMarca"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:layout_width="250dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey_hint"
+        android:layout_height="wrap_content"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/tvTamano"
+        android:text="@string/tamano_string"
+        app:layout_constraintTop_toBottomOf="@id/etMarca"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etTamano"
+        android:hint="@string/tamano_hint_string"
+        app:layout_constraintTop_toBottomOf="@id/tvTamano"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey_hint"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"/>
+
+
+
+    <Button
+        android:id="@+id/btAgregar"
+        app:layout_constraintTop_toBottomOf="@id/etTamano"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_agregar_string"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:backgroundTint="@color/pink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvNotif"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@id/btAgregar"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:textColor="@color/pink"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btRecyclerView"
+        android:text="@string/btn_recyclerView_string"
+        app:layout_constraintBottom_toBottomOf="@id/glBottomMargin"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toStartOf="@+id/glStart"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:backgroundTint="@color/pink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
